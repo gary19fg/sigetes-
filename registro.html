@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - SIGE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            text-align: center;
+            color: #2f4f2f;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Registro de Alumno</h2>
+    <form id="registroForm" action="registro.php" method="POST" onsubmit="return validarFormulario()">
+        <!-- Datos generales -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" maxlength="20" required>
+        <div class="error" id="error-nombre"></div>
+
+        <label for="apellido_paterno">Apellido Paterno:</label>
+        <input type="text" name="apellido_paterno" id="apellido_paterno" maxlength="20" required>
+        <div class="error" id="error-paterno"></div>
+
+        <label for="apellido_materno">Apellido Materno:</label>
+        <input type="text" name="apellido_materno" id="apellido_materno" maxlength="20" required>
+        <div class="error" id="error-materno"></div>
+
+        <label for="correo">Correo institucional:</label>
+        <input type="email" name="correo" id="correo" maxlength="50" required>
+        <div class="error" id="error-correo"></div>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" name="contrasena" id="contrasena" maxlength="255" required>
+        <div class="error" id="error-contrasena"></div>
+
+        <label for="tipo_usuario">Tipo de usuario:</label>
+        <select name="tipo_usuario" id="tipo_usuario" required>
+            <option value="alumno" selected>Alumno</option>
+        </select>
+
+        <!-- Campos específicos del alumno -->
+        <label for="id_alumno">Matrícula:</label>
+        <input type="text" name="id_alumno" id="id_alumno" maxlength="20" required>
+        <div class="error" id="error-id-alumno"></div>
+
+        <label for="semestre_actual">Semestre Actual:</label>
+        <input type="number" name="semestre_actual" id="semestre_actual" min="1" max="12" required>
+
+        <label for="estatus">Estatus:</label>
+        <select name="estatus" id="estatus" required>
+            <option value="">Seleccionar...</option>
+            <option value="regular">Regular</option>
+            <option value="irregular">Irregular</option>
+        </select>
+
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+<script>
+function validarFormulario() {
+    let esValido = true;
+
+    document.querySelectorAll('.error').forEach(e => e.textContent = '');
+
+    const nombre = document.getElementById('nombre').value.trim();
+    if (nombre.length < 2 || nombre.length > 30) {
+        document.getElementById('error-nombre').textContent = 'El nombre debe tener entre 2 y 30 caracteres.';
+        esValido = false;
+    }
+
+    const paterno = document.getElementById('apellido_paterno').value.trim();
+    if (paterno.length < 2 || paterno.length > 30) {
+        document.getElementById('error-paterno').textContent = 'El apellido paterno debe tener entre 2 y 30 caracteres.';
+        esValido = false;
+    }
+
+    const materno = document.getElementById('apellido_materno').value.trim();
+    if (materno.length < 2 || materno.length > 30) {
+        document.getElementById('error-materno').textContent = 'El apellido materno debe tener entre 2 y 30 caracteres.';
+        esValido = false;
+    }
+
+    const correo = document.getElementById('correo').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+        document.getElementById('error-correo').textContent = 'Introduce un correo válido.';
+        esValido = false;
+    }
+
+    const contrasena = document.getElementById('contrasena').value.trim();
+    if (contrasena.length < 6 || contrasena.length > 255) {
+        document.getElementById('error-contrasena').textContent = 'La contraseña debe tener entre 6 y 255 caracteres.';
+        esValido = false;
+    }
+
+    const idAlumno = document.getElementById('id_alumno').value.trim();
+    if (!idAlumno || idAlumno.length > 20) {
+        document.getElementById('error-id-alumno').textContent = 'La matrícula es obligatoria y debe tener máximo 20 caracteres.';
+        esValido = false;
+    }
+
+    return esValido;
+}
+</script>
+</body>
+</html>

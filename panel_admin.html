@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - SIGE</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5dc;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #2f4f2f;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .contenido {
+            padding: 30px;
+        }
+        .card {
+            background-color: #ffffffcc;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel Administrativo - SIGE</h1>
+    </header>
+    <nav>
+        <a href="#alumnos">Ver Alumnos</a>
+        <a href="#materias">Gestionar Materias</a>
+        <a href="logout.php">Cerrar Sesión</a>
+    </nav>
+    <div class="contenido">
+        <div class="card">
+            <h2>Bienvenido, administrador</h2>
+            <p>Desde este panel puedes consultar y editar los estados de todas las materias de los alumnos.</p>
+        </div>
+        <!-- Aquí se pueden cargar los módulos de administración -->
+    </div>
+</body>
+</html>
